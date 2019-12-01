@@ -5,6 +5,6 @@
    	00-Extrair_demonstracoes.ipynb
     01-convertendo_para_bd.ipynb
     02-concatenando_todas_demonstracoes.ipynb
-    10-extrair_dados_operadoras.ipynb
+    03-atribuicao_contas.ipynb
     
 ### nomes dos arquivos gerados estão no arquivo "parametros.config"     

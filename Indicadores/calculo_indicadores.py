@@ -21,6 +21,7 @@ class CalculoIndicadores:
 		result_liquido = self.calcular_resultado_liquido(x)
 		contraprestacoes = self.calcular_contraprestacoes_efetivas(x)
 		if(contraprestacoes == 0 ):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'MLL')
 			return 0
 		return result_liquido/contraprestacoes
 	
@@ -37,18 +38,21 @@ class CalculoIndicadores:
 	def calcular_dm(self,x):
 		contraprestacoes = self.calcular_contraprestacoes_efetivas(x)
 		if(contraprestacoes == 0 ):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'DM')
 			return 0
 		return self.calcular_eventos_indenizaveis_liquido(x)/contraprestacoes
 
 	def calcular_da(self,x):
 		contraprestacoes = self.calcular_contraprestacoes_efetivas(x)
 		if(contraprestacoes == 0 ):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'DA')
 			return 0
 		return x['DESPESA_ADM']/contraprestacoes
 
 	def calcular_dc(self,x):
 		contraprestacoes = self.calcular_contraprestacoes_efetivas(x)
 		if(contraprestacoes == 0 ):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'DC')
 			return 0
 		return x['DESPESA_COM']/contraprestacoes
 
@@ -56,6 +60,7 @@ class CalculoIndicadores:
 		y = self.calcular_eventos_indenizaveis_liquido(x)+x['DESPESA_ADM']+x['DESPESA_COM']+x['OUTRAS DESPESAS OPERACIONAIS']
 		z = self.calcular_contraprestacoes_efetivas(x)+x['OUTRAS DESPESAS OPERACIONAIS']
 		if (z ==0):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'DOP')
 			return 0
 		return y/z			
 
@@ -65,6 +70,7 @@ class CalculoIndicadores:
 	def calcular_irf(self,x):
 		contraprestracoes_efetivas = self.calcular_contraprestacoes_efetivas(x)
 		if (contraprestracoes_efetivas == 0):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'IRF')
 			return 0
 		return self.calcular_resultado_financeiro_liquido(x)/contraprestracoes_efetivas
 
@@ -77,6 +83,7 @@ class CalculoIndicadores:
 	def calcular_pmrc(self,x):
 		contraprestacao_efetiva = self.calcular_contraprestacoes_efetivas(x)
 		if (contraprestacao_efetiva == 0):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'PMRC')
 			return 0
 		return ((x['CREDITO_OPER_PS'] + math.fabs(x['PPSC']))/contraprestacao_efetiva)*360
 
@@ -84,7 +91,11 @@ class CalculoIndicadores:
 		return x['PESL_OUTROS'] + x['PESL_SUS']
 
 	def calcular_pmpe(self,x):
-		return (self.calcular_provisao_eventos_a_liquidar(x)/self.calcular_eventos_indenizaveis_liquido(x))*360
+		eventos_indenizaveis = self.calcular_eventos_indenizaveis_liquido(x)
+		if (eventos_indenizaveis == 0):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'PMPE')
+			return 0
+		return (self.calcular_provisao_eventos_a_liquidar(x)/eventos_indenizaveis)*360
 
 	def calcular_provisoes_tecnicas_exigidas(self,x):
 		return x['REMISSAO'] + x['PESL_SUS']+ x['PESL_OUTROS'] + x['PEONA_OUTROS']
@@ -92,5 +103,6 @@ class CalculoIndicadores:
 	def calcular_latro_pt(self,x):
 		provisoes_tecnicas = self.calcular_provisoes_tecnicas_exigidas(x)
 		if (provisoes_tecnicas == 0):
+			print(x['REG_ANS'],x['ANO'],x['TRIMESTRE'],'LASTRO PT')
 			return 0
 		return x['APLICAÇÕES GARANTIDORAS']/provisoes_tecnicas

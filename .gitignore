@@ -3,3 +3,4 @@ graficos/*
 entrada/*
 Extracao/resultado/*
 Extracao/todas_demonstracoes.csv
+*.csv
